@@ -1,10 +1,10 @@
 # Knight
-**Angular** and **Knockout** templates packer. Packs .html files into .js for **Angular** or **Knockout**.
+**Angular** and **Knockout** templates packer. Tool to pack .html files into .js for **Angular** or **Knockout**.
 
 **Features**:
 - Console application with documented interface (includes *--help*)
 - Cross platform: being in Python, it can run on Linux, Windows and Mac
-- Executables ready to use, provided for those users who don't want to or cannot install Python
+- Executables ready to use, provided for Windows users who don't want to or cannot install Python
 - Allows to run UnderscoreJs *template* compilation over templates (useful, for example, to implement localization)
 - Examples in both Angular and Knockout, of view composition with cached templates
 - Provides a way to manage in-memory templates in Knockout **(instead of using script tags with type="text/html")**
@@ -23,7 +23,7 @@
 Commands
 --------------
 - -h --help displays the help for the console application
-- -p / --path *path* -m / --mode *mode {ko,ng}* starting from the given folder path, looks recursively inside each direct child folder, and generates for each of them a **templates.js** file containing the packed HTML files.
+- -p / --path *path* -m / --mode *mode {ko,ng}* starting from the given folder path, looks recursively inside each direct child folder for .html files, and generates for each directory a **templates.js** file containing the packed HTML files.
 
 Optional parameters
 --------------

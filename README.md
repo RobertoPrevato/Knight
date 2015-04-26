@@ -1,5 +1,5 @@
 # Knight
-Angular and Knockout templates packer. Packs .html files into .js for Angular or Knockout.
+Angular and Knockout templates packer. Packs .html files into .js for **Angular** or **Knockout**.
 
 **Features**:
 - Provides a way to pack .html templates into .js files

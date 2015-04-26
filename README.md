@@ -7,7 +7,7 @@ Angular and Knockout templates packer. Packs .html files into .js for Angular or
 - Executables ready to use, provided for those users who don't want to or cannot install Python
 - Allows to run UnderscoreJs *template* compilation over templates (useful for example to implement localization)
 - Examples in both Angular and Knockout, of view composition with cached templates
-- Provides a way to manage in-memory templates in Knockout **(instead of using <script type="text/html">)**
+- Provides a way to manage in-memory templates in Knockout **(instead of using script tags with type="text/html")**
 
 **Repository structure**:
 - The **source** folder contains the tool source code, which is in Python.

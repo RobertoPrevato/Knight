@@ -3,7 +3,6 @@ import io
 import sys
 
 isPython3 = sys.version_info >= (3, 0)
-# TODO: check why saving works only with Python3, while Python2 doesn't cause any exception, but doesn't save files.
 
 class Scribe:
 

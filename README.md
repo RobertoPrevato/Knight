@@ -2,7 +2,7 @@
 **Angular** and **Knockout** templates packer. Packs .html files into .js for **Angular** or **Knockout**.
 
 **Features**:
-- Console application with documented interface (includes well explained *--help*)
+- Console application with documented interface (includes *--help*)
 - Cross platform: being in Python, it can run on Linux, Windows and Mac
 - Executables ready to use, provided for those users who don't want to or cannot install Python
 - Allows to run UnderscoreJs *template* compilation over templates (useful, for example, to implement localization)

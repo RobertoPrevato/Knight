@@ -19,3 +19,13 @@
 **Examples**:
 - Simply download the code and open the index.html in a browser (examples don't require a local web server)
 - Some of the external libraries are loaded using CDN
+
+Commands
+--------------
+- -h --help displays the help for the console application
+- -p / --path *path* -m / --mode *mode {ko,ng}* starting from the given folder path, looks recursively inside each direct child folder, and generates for each of them a **templates.js** file containing the packed HTML files.
+
+Optional parameters
+--------------
+- -a --appname *application name* when generating templates.js files for Angular, the name of a global variable referencing the application object (default == "app").
+- -u --underscoreJsCompile *js global variable name* allows to run UnderscoreJs compilation on templates, using the given global variable/function. The parameter determines the context passed as argument for **_.template** function (default == null).

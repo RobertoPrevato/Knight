@@ -1,5 +1,5 @@
 # Knight
-Angular and Knockout templates packer. Packs .html files into .js for **Angular** or **Knockout**.
+**Angular** and **Knockout** templates packer. Packs .html files into .js for **Angular** or **Knockout**.
 
 **Features**:
 - Provides a way to pack .html templates into .js files
@@ -10,7 +10,7 @@ Angular and Knockout templates packer. Packs .html files into .js for **Angular*
 - Provides a way to manage in-memory templates in Knockout **(instead of using script tags with type="text/html")**
 
 **Repository structure**:
-- The **source** folder contains the tool source code, which is in Python.
+- The **source** folder contains the Python source code.
 - This code can be executed by both Python 2.x and Python 3.x.
 - The **source** folder also contains a setup.py file used with <a href="http://cx-freeze.readthedocs.org/">cx_Freeze</a> to generate the executables.
 - The **built** folder contains executables versions of the application: Windows users who don't want to (or cannot) install Python, can use the .exe file provided there.

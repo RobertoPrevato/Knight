@@ -23,7 +23,9 @@
 Commands
 --------------
 - -h --help displays the help for the console application
+![Help](https://github.com/RobertoPrevato/Knight/blob/master/docs/images/console-app-help.png)
 - -p / --path *path* -m / --mode *mode {ko,ng}* starting from the given folder path, looks recursively inside each direct child folder for .html files, and generates for each directory a **templates.js** file containing the packed HTML files.
+![Templates Generation](https://github.com/RobertoPrevato/Knight/blob/master/docs/images/console-app-templates.png)
 
 Optional parameters
 --------------

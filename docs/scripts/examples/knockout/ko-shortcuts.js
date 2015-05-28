@@ -3,7 +3,7 @@
 //
 +function (k) {
 
-  //define shortcuts for knockout; some properties are too long and they don't get minified
+  //define shortcuts for knockout;
   k.o = function (a) {
     return a instanceof Array
       ? this.observableArray(a)

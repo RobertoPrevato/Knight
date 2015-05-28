@@ -1,6 +1,8 @@
 # Knight
 **Angular** and **Knockout** templates packer. Tool to pack .html files into .js for **Angular** or **Knockout**.
 
+[Live demo](http://ugrose.com/content/demos/knight/index.html)
+
 **Features**:
 - Console application with documented interface (includes *--help*)
 - Cross platform: being in Python, it can run on Linux, Windows and Mac

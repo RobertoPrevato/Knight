@@ -15,9 +15,9 @@ build_exe_options = {"packages": ["os", "core", "lib"] }
 executablePath = "/home/ug/Projects/git/Knight/source/knight.py"
 
 setup(
-	name = "Knight",
-	version = "1.0",
-	description = "Angular and Knockout templates packer. Packs .html files into .js for Angular or Knockout.",
-	options = {"build_exe": build_exe_options},
-	executables = [Executable(executablePath)]
+    name = "Knight",
+    version = "1.0",
+    description = "Angular and Knockout templates packer. Packs .html files into .js for Angular or Knockout.",
+    options = {"build_exe": build_exe_options},
+    executables = [Executable(executablePath)]
 )

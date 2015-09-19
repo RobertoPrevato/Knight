@@ -10,14 +10,21 @@ def get_areas_names(path):
     areas = [f for f in listdir(path) if isdir(join(path,f))]
     return areas
 
-def generate_templates_files(path, mode, appname = "app", underscore_js_compile = None, log = True):
+def generate_templates_files(path, mode, appname = "app", underscore_js_compile = None, templates_variable = None):
     """
         Creates templates.js files for areas found under the given path
     """
-    modeval = re.compile("^ko$|^ng$", re.I)
+    if mode is None:
+        mode = "no"
+    modeval = re.compile("^ko$|^ng$|^no$", re.I)
     if modeval.search(mode) is None:
-        raise Exception("invalid 'templateMode' configuration: it must be KO | NG - case insensitive")
-
+        raise Exception("invalid 'templateMode' configuration: it must be KO | NG | NO - case insensitive")
+    
+    mode = mode.upper()
+    
+    if mode == "NO" and templates_variable is None:
+        templates_variable = "templates"
+    
     # declare html traverser
     t = Traversers.HtmlTraverser()
     # find all areas names
@@ -31,12 +38,13 @@ def generate_templates_files(path, mode, appname = "app", underscore_js_compile 
         if len(htmls) == 0:
             continue
 
-        if log:
-            print("...processing \"{}\" in {}".format(a, area_path))
+        print("...processing \"{}\" in {}".format(a, area_path))
 
-        if mode.upper() == "KO":
-            get_templates_for_knockout(area_path, htmls, underscore_js_compile)
-        elif mode.upper() == "NG":
+        if mode == "KO":
+            get_templates(area_path, htmls, underscore_js_compile, "ko.templates")
+        elif mode == "NO":
+            get_templates(area_path, htmls, underscore_js_compile, templates_variable)
+        elif mode == "NG":
             get_templates_for_angular(area_path, htmls, appname, underscore_js_compile)
         else:
             print("ERROR: mode not set")
@@ -108,7 +116,7 @@ def get_templates_for_angular(path, all_html_files, appname, underscore_js_compi
     print("...saving file {}".format(outputPath))
     Scribe.write(code, outputPath)
 
-def get_templates_for_knockout(path, all_html_files, underscore_js_compile):
+def get_templates(path, all_html_files, underscore_js_compile, templates_variable):
     """
         Creates templates.js files for KnockOut
     """
@@ -118,7 +126,7 @@ def get_templates_for_knockout(path, all_html_files, underscore_js_compile):
     f.append("//Knight generated templates file")
     f.append("//")
     f.append("\"use strict\";")
-    f.append("if (!ko.templates) ko.templates = {};")
+    f.append("if (!" + templates_variable + ") " + templates_variable + " = {};")
     f.append("(function (templates) {")
 
     f.append("\tvar o = {")
@@ -166,7 +174,7 @@ def get_templates_for_knockout(path, all_html_files, underscore_js_compile):
         f.append("\t\tx[k] = _.template(v, ctx);")
         f.append("\t});")
 
-    f.append("})(ko.templates);")
+    f.append("})(" + templates_variable + ");")
 
     code = "\n".join(f)
 

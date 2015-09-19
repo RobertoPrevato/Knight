@@ -1,5 +1,5 @@
 # Knight
-**Angular** and **Knockout** templates packer. Tool to pack .html files into .js for **Angular** or **Knockout**.
+Html templates packer. Tool to pack .html files into .js for **Angular**, **Knockout**, or inside a custom global variable (abstracted from any library).
 
 [Live demo](http://ugrose.com/content/demos/knight/index.html)
 

@@ -1,9 +1,26 @@
-//
 //Roberto Prevato
-//custom template engine for knockout js, to support templates cached in memory (inside ko.templates variable).
-//
-"use strict";
+//custom template engine for knockout js, to support cached templates
 (function (ko, _) {
+
+  //NB: in newer versions of lodash, the template function returns a compiler function;
+  //in older versions it returns directly a string
+  var templateMode = typeof _.template("") == "string" ? 0 : 1;
+  function getTemplate(data, context, key) {
+    switch (templateMode) {
+      case 0:
+        //legacy mode: _.template returns a string
+        return _.template(data, context);
+      case 1:
+        //newer mode: _.template returns a compiler function
+        //was the template already cached? (i.e. is it already a function, instead of html?)
+        if (typeof data == "function")
+          return data(context);
+        //store in cache and return compiled template
+        var compiler = ko.templates[key] = _.template(data);
+        return compiler(context);
+    }
+  };
+
 	//override base templateEngine makeTemplateSource to extend it, to load cached templates
 	ko.templateEngine.prototype['makeTemplateSource'] = function (template, templateDocument) {
 		// Named template
@@ -20,7 +37,7 @@
 				s.setAttribute('type', 'text/html');
 				s.setAttribute('id', template);
 				//compile for translations
-				var t = _.template(ko.templates[template], {});
+				var t = getTemplate(ko.templates[template], {}, template);
 				s.text = t;
 				//set reference to s
 				elem = s;

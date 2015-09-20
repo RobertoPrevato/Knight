@@ -10,7 +10,7 @@ def get_areas_names(path):
     areas = [f for f in listdir(path) if isdir(join(path,f))]
     return areas
 
-def generate_templates_files(path, mode, appname = "app", underscore_js_compile = None, templates_variable = None):
+def generate_templates_files(path, mode, appname = "app", underscore_js_compile = None, templates_variable = None, comment = None):
     """
         Creates templates.js files for areas found under the given path
     """
@@ -41,24 +41,27 @@ def generate_templates_files(path, mode, appname = "app", underscore_js_compile 
         print("...processing \"{}\" in {}".format(a, area_path))
 
         if mode == "KO":
-            get_templates(area_path, htmls, underscore_js_compile, "ko.templates")
+            get_templates(area_path, htmls, underscore_js_compile, "ko.templates", comment)
         elif mode == "NO":
-            get_templates(area_path, htmls, underscore_js_compile, templates_variable)
+            get_templates(area_path, htmls, underscore_js_compile, templates_variable, comment)
         elif mode == "NG":
-            get_templates_for_angular(area_path, htmls, appname, underscore_js_compile)
+            get_templates_for_angular(area_path, htmls, appname, underscore_js_compile, comment)
         else:
             print("ERROR: mode not set")
 
-def get_templates_for_angular(path, all_html_files, appname, underscore_js_compile):
+def get_templates_for_angular(path, all_html_files, appname, underscore_js_compile, comment):
     """
         Creates templates.js files for AngularJs
     """
     f = []
     pat = r"<!--template=\"([a-zA-Z0-9\\-]+)\"-->"
     f.append("//")
-    f.append("//Knight generated templates file")
+    f.append("//Knight generated templates file.")
+    if comment is not None:
+        f.append("// * ")
+        f.append("// * " + comment)
+        f.append("// * ")
     f.append("//")
-    f.append("\"use strict\";")
     f.append("(function () {")
 
     f.append("\tvar o = {")
@@ -116,16 +119,19 @@ def get_templates_for_angular(path, all_html_files, appname, underscore_js_compi
     print("...saving file {}".format(outputPath))
     Scribe.write(code, outputPath)
 
-def get_templates(path, all_html_files, underscore_js_compile, templates_variable):
+def get_templates(path, all_html_files, underscore_js_compile, templates_variable, comment):
     """
         Creates templates.js files for KnockOut
     """
     f = []
     pat = r"<!--template=\"([a-zA-Z0-9\\-]+)\"-->"
     f.append("//")
-    f.append("//Knight generated templates file")
+    f.append("//Knight generated templates file.")
+    if comment is not None:
+        f.append("// * ")
+        f.append("// * " + comment)
+        f.append("// * ")
     f.append("//")
-    f.append("\"use strict\";")
     f.append("if (!" + templates_variable + ") " + templates_variable + " = {};")
     f.append("(function (templates) {")
 

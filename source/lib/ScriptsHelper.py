@@ -64,7 +64,7 @@ def get_templates_for_angular(path, all_html_files, appname, underscore_js_compi
     f.append("//")
     f.append("(function () {")
 
-    f.append("\tvar o = {")
+    f.append("  var o = {")
     k = len(all_html_files)
     i = 0
     for h in all_html_files:
@@ -90,27 +90,27 @@ def get_templates_for_angular(path, all_html_files, appname, underscore_js_compi
         # condensate
         txt = Text.condensate(txt)
 
-        f.append("\t\t\'{0}\': \'{1}\'{2}".format(name, txt, "," if i < k else ""))
+        f.append("    \'{0}\': \'{1}\'{2}".format(name, txt, "," if i < k else ""))
         
-    f.append("\t};")
+    f.append("  };")
 
-    f.append("\tvar f = function(a) {")
+    f.append("  var f = function(a) {")
     if underscore_js_compile is None or underscore_js_compile == "":
         #plain templates
-        f.append("\t\tvar x;")
-        f.append("\t\tfor (x in o) {")
-        f.append("\t\t\ta.put(x, o[x]);")
-        f.append("\t\t}")
+        f.append("    var x;")
+        f.append("    for (x in o) {")
+        f.append("      a.put(x, o[x]);")
+        f.append("    }")
     else:
         #templates run into UnderscoreJs template function
-        f.append("\t\tvar ctx = {};".format(underscore_js_compile))
-        f.append("\t\t_.each(o, function (v, k) {")
-        f.append("\t\t\ta.put(k, _.template(v, ctx));")
-        f.append("\t\t});")
+        f.append("    var ctx = {};".format(underscore_js_compile))
+        f.append("    _.each(o, function (v, k) {")
+        f.append("      a.put(k, _.template(v, ctx));")
+        f.append("    });")
 
-    f.append("\t};")
-    f.append("\tf.$inject = ['$templateCache'];")
-    f.append("\t{0}.run(f);".format(appname))
+    f.append("  };")
+    f.append("  f.$inject = ['$templateCache'];")
+    f.append("  {0}.run(f);".format(appname))
     f.append("})();")
 
     code = "\n".join(f)
@@ -135,7 +135,7 @@ def get_templates(path, all_html_files, underscore_js_compile, templates_variabl
     f.append("if (!" + templates_variable + ") " + templates_variable + " = {};")
     f.append("(function (templates) {")
 
-    f.append("\tvar o = {")
+    f.append("  var o = {")
 
     k = len(all_html_files)
     i = 0
@@ -163,22 +163,22 @@ def get_templates(path, all_html_files, underscore_js_compile, templates_variabl
         # condensate
         txt = Text.condensate(txt)
 
-        f.append("\t\t'{}\': \'{}\'{}".format(name, txt, "," if i < k else ""))
+        f.append("    '{}\': \'{}\'{}".format(name, txt, "," if i < k else ""))
 
-    f.append("\t};")
+    f.append("  };")
 
     if underscore_js_compile is None or underscore_js_compile == "":
         #plain templates
-        f.append("\tvar x;")
-        f.append("\tfor (x in o) {")
-        f.append("\t\ttemplates[x] = o[x];")
-        f.append("\t}")
+        f.append("  var x;")
+        f.append("    for (x in o) {")
+        f.append("    templates[x] = o[x];")
+        f.append("  }")
     else:
         #templates run into UnderscoreJs template function
-        f.append("\tvar ctx = {};".format(underscore_js_compile))
-        f.append("\t_.each(o, function (v, k) {")
-        f.append("\t\tx[k] = _.template(v, ctx);")
-        f.append("\t});")
+        f.append("  var ctx = {};".format(underscore_js_compile))
+        f.append("  _.each(o, function (v, k) {")
+        f.append("    x[k] = _.template(v, ctx);")
+        f.append("  });")
 
     f.append("})(" + templates_variable + ");")
 

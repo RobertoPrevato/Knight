@@ -170,7 +170,7 @@ def get_templates(path, all_html_files, underscore_js_compile, templates_variabl
     if underscore_js_compile is None or underscore_js_compile == "":
         #plain templates
         f.append("  var x;")
-        f.append("    for (x in o) {")
+        f.append("  for (x in o) {")
         f.append("    templates[x] = o[x];")
         f.append("  }")
     else:

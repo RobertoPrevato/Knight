@@ -132,7 +132,7 @@ def get_templates(path, all_html_files, underscore_js_compile, templates_variabl
         f.append("// * " + comment)
         f.append("// * ")
     f.append("//")
-    f.append("if (!" + templates_variable + ") " + templates_variable + " = {};")
+    f.append("if (!window." + templates_variable + ") window." + templates_variable + " = {};")
     f.append("(function (templates) {")
 
     f.append("  var o = {")
